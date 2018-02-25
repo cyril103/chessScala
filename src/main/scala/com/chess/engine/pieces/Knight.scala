@@ -9,7 +9,7 @@ case class Knight(position : Int, alliance : Alliance , isFirstMove : Boolean = 
   override def getPieceValue: Int = value
 
   override def calculateLegalMove(board: Board): List[Option[Move]] = (for{
-    candidateMoves: Int <- CANDIDATE_MOVE_COORDINATE
+    candidateMoves: Int <- CandidateMoveOffset
 
     if BoardUtil.isValidTileCoord(this.position + candidateMoves)
     if !(isExclusion(1)(this.position,candidateMoves) ||
@@ -29,7 +29,7 @@ case class Knight(position : Int, alliance : Alliance , isFirstMove : Boolean = 
 
 object Knight{
 
-  private val CANDIDATE_MOVE_COORDINATE = List(6,10,15,17,-6,-10,-15,-17)
+  private val CandidateMoveOffset = List(6,10,15,17,-6,-10,-15,-17)
   private val value = 300
 
   private def isExclusion(column: Int)(currentPos :Int, offset :Int) =  {

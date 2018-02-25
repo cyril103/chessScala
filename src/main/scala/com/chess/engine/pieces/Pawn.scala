@@ -14,7 +14,7 @@ case class Pawn(position : Int, alliance : Alliance ,isFirstMove : Boolean = tru
    def calculateLegalMove(board: Board): List[Option[Move]] = {
     val legalMove = ListBuffer[Option[Move]]()
 
-    for(candidate <- CANDIDATE_MOVE_COORDINATE ){
+    for(candidate <- CandidateMoveOffset ){
       val destCoord = this.position + candidate * this.alliance.direction
       if(!BoardUtil.isValidTileCoord(destCoord)){}
       else (candidate,board.tile(destCoord)) match {
@@ -48,6 +48,6 @@ case class Pawn(position : Int, alliance : Alliance ,isFirstMove : Boolean = tru
 }
 
 object Pawn{
-  private val CANDIDATE_MOVE_COORDINATE = List(8,16,7,9)
+  private val CandidateMoveOffset = List(8,16,7,9)
   private val value = 100
 }

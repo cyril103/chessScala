@@ -15,7 +15,7 @@ case class Bishop(position : Int, alliance : Alliance, isFirstMove : Boolean = t
 
   override def calculateLegalMove(board: Board): List[Option[Move]] = {
     val legalMoves = ListBuffer[Option[Move]]()
-    for(candidateCoordinateOffset <- CANDIDATE_MOVE_COORDINATE){
+    for(candidateCoordinateOffset <- CandidateMoveOffset){
       var candidateDestinationCoordinate = this.position
 
       breakable {
@@ -50,7 +50,7 @@ case class Bishop(position : Int, alliance : Alliance, isFirstMove : Boolean = t
 }
 
 object Bishop {
-  private val CANDIDATE_MOVE_COORDINATE = List(-9,9,-7,7)
+  private val CandidateMoveOffset = List(-9,9,-7,7)
   private val value = 300
 
   private def isExclusion(column: Int)(currentPos :Int, offset :Int) =  {

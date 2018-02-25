@@ -14,7 +14,7 @@ case class Rook(position : Int, alliance : Alliance, isFirstMove : Boolean = tru
 
   override def calculateLegalMove(board: Board): List[Option[Move]] = {
     val legalMoves = ListBuffer[Option[Move]]()
-    for(candidateCoordinateOffset <- CANDIDATE_MOVE_COORDINATE){
+    for(candidateCoordinateOffset <- CandidateMoveOffset){
       var candidateDestinationCoordinate = this.position
 
       breakable {
@@ -47,7 +47,7 @@ case class Rook(position : Int, alliance : Alliance, isFirstMove : Boolean = tru
 }
 
 object Rook {
-  private val CANDIDATE_MOVE_COORDINATE = List(-1,1,8,-8)
+  private val CandidateMoveOffset = List(-1,1,8,-8)
   private val value = 500
 
   private def isExclusion(column: Int)(currentPos :Int, offset :Int) =  {

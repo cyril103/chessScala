@@ -11,7 +11,7 @@ case class King (position : Int, alliance : Alliance, isFirstMove : Boolean = tr
 
   def calculateLegalMove(board: Board): List[Option[Move]] = (for{
 
-    candidateMoves: Int <- CANDIDATE_MOVE_COORDINATE
+    candidateMoves: Int <- CandidateMoveOffset
 
     if BoardUtil.isValidTileCoord(this.position + candidateMoves)
     if !(isExclusion(1)(this.position,candidateMoves) ||
@@ -28,7 +28,7 @@ case class King (position : Int, alliance : Alliance, isFirstMove : Boolean = tr
 }
 
 object King {
-  private val CANDIDATE_MOVE_COORDINATE = List(-1,1,8,-8,-9,9,-7,7)
+  private val CandidateMoveOffset = List(-1,1,8,-8,-9,9,-7,7)
   private val value = 1000
 
   private def isExclusion(column: Int)(currentPos :Int, offset :Int) =  {
