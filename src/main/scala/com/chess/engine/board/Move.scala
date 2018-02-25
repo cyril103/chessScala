@@ -73,10 +73,24 @@ case class PawnAttackMove( board : Board,
 
 
 
-case class PawnEnPassantAttackMove( board : Board,
-                          movedPiece: Piece,
-                          coordDest :Int,
-                          pieceTarget : Piece ) extends MoveWithAttack
+case class PawnEnPassantAttack (board : Board,
+                               movedPiece: Piece,
+                               coordDest :Int,
+                               pieceTarget : Piece ) extends MoveWithAttack{
+
+  override def execute(): Board = {
+    val builder = new Board.Builder()
+
+    board.currentPlayer.getActivePieces.foreach(piece => if(this.movedPiece != piece) builder.setPiece(piece))
+    board.currentPlayer.getOpponent.getActivePieces.foreach(piece => if(piece != getAttackedPiece.get) builder.setPiece(piece))
+
+    builder.setPiece(movedPiece.movePiece(this))
+
+    builder.setMoveMaker(this.board.currentPlayer.getOpponent.getAlliance)
+    builder.setMoveTransition(this)
+    builder.build()
+  }
+}
 
 
 

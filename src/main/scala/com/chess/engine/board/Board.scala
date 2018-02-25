@@ -106,14 +106,14 @@ object Board{
   class Builder{
 
     private var enPassantPawn : Pawn = _
-
-    def setEnPassantPawn(enPassntPawn: Pawn): Unit = this.enPassantPawn = enPassntPawn
-
-
-    val boardConfig: mutable.Map[Int, Piece] = mutable.Map[Int,Piece]()
     private var _nextMoveMaker : Alliance = _
+    private var _moveTransition : Move = _
+    val boardConfig: mutable.Map[Int, Piece] = mutable.Map[Int,Piece]()
 
-    def build() = new Board(this)
+    def setEnPassantPawn(enPassntPawn: Pawn): Builder = {
+      this.enPassantPawn = enPassntPawn
+    this
+    }
 
     def setPiece(piece : Piece) : Builder = {
       boardConfig += (piece.position -> piece)
@@ -125,7 +125,16 @@ object Board{
       this
     }
 
+    def setMoveTransition(moveTransition: Move): Builder = {
+      this._moveTransition = moveTransition
+      this
+    }
+
+
+
     def nextMoveMaker : Alliance = _nextMoveMaker
+
+    def build(): Board = new Board(this)
 
   }
 }
