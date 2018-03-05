@@ -106,18 +106,8 @@ object GameHistoryPanel{
     private val NAMES = Array("White","Black")
 
     private class Row{
-      private var _whiteMove = ""
-      private var _blackMove = ""
-
-      def whiteMove: String = _whiteMove
-
-      def blackMove: String = _blackMove
-
-      def whiteMove_=(move : String): Unit = _whiteMove = move
-
-      def blackMove_=(move : String): Unit = _blackMove = move
-
-
+      var whiteMove = ""
+      var blackMove = ""
 
     }
   }
